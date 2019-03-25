@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-
-
-# This is a re-implementation of training code of our paper:
-# X. Fu, J. Huang, D. Zeng, Y. Huang, X. Ding and J. Paisley. “Removing Rain from Single Images via a Deep Detail Network”, CVPR, 2017.
-# author: Xueyang Fu (fxy@stu.xmu.edu.cn)
-
 import os
 import random
 
