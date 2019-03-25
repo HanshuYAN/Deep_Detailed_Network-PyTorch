@@ -1,8 +1,5 @@
-# This tensorflow implementation of guided filter is from: H. Wu, et al., "Fast End-to-End Trainable Guided Filter", CPVR, 2018.
+# This PyTorch implementation of guided filter is from: H. Wu, et al., "Fast End-to-End Trainable Guided Filter", CPVR, 2018.
 
-# Web: https://github.com/wuhuikai/DeepGuidedFilter
-
-# import tensorflow as tf
 import torch
 
 def diff_x(input, r):
@@ -38,27 +35,11 @@ def box_filter(x, r):
 def guided_filter(x, y, r, eps=1e-8, nhwc=False, nchw=True):
     assert len(x.shape) == 4 and len(y.shape) == 4
 
-    # data format
-    # if nhwc:
-    #     x = tf.transpose(x, [0, 3, 1, 2])
-    #     y = tf.transpose(y, [0, 3, 1, 2])
     assert nchw == True
     # shape check
     x_shape = x.shape
     y_shape = y.shape
-
-    # x_shape = tf.shape(x)
-    # y_shape = tf.shape(y)
-
-    # assets = [tf.assert_equal(   x_shape[0],  y_shape[0]),
-    #           tf.assert_equal(  x_shape[2:], y_shape[2:]),
-    #           tf.assert_greater(x_shape[2:],   2 * r + 1),
-    #           tf.Assert(tf.logical_or(tf.equal(x_shape[1], 1),
-    #                                   tf.equal(x_shape[1], y_shape[1])), [x_shape, y_shape])]
-
-    # with tf.control_dependencies(assets):
-    #     x = tf.identity(x)
-
+    
     # N
     cuda = torch.cuda.is_available()
     if cuda:
@@ -82,8 +63,5 @@ def guided_filter(x, y, r, eps=1e-8, nhwc=False, nchw=True):
     mean_b = box_filter(b, r) / N
 
     output = mean_A * x + mean_b
-
-    # if nhwc:
-    #     output = tf.transpose(output, [0, 2, 3, 1])
 
     return output
