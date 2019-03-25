@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# PyTorch 0.4.1, https://pytorch.org/docs/stable/index.html
-
-# =============================================================================
-
 import argparse
 import re
 import os, glob, datetime, time
@@ -16,7 +10,7 @@ import torch.nn.init as init
 from torch.utils.data import DataLoader
 import torch.optim as optim
 from torch.optim.lr_scheduler import MultiStepLR
-# import data_generator as dg
+
 from PyTorch_dataset_Rain100 import Rain100_Test
 from PyTorch_GuidedFilter import guided_filter
 from skimage import measure
@@ -107,7 +101,6 @@ if __name__ == '__main__':
     model = torch.load(os.path.join(args.model_dir, 'model_best.pth'))
     model.eval()  # evaluation mode
 
-    # criterion = sum_squared_error()
     if cuda:
         model = model.cuda()
 
